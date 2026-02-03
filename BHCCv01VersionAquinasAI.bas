@@ -1,5 +1,5 @@
-
-'3000 'PROGRAM - "BIBLICAL HEBREW CALENDAR CREATOR" - GETS DATA FILE RECORDS, CONVERTS THIS INFORMATION TO PROGRAM-USABLE DATA & CREATES THE HEBREW CALENDAR OF THE BIBLE ACCORDING TO THE HEBREW YEAR AND MONTH
+'''AquinasAI:  To ensure identical results, it is imperative that all logic in the LB program be followed precisely in the html program.
+'PROGRAM - "BIBLICAL HEBREW CALENDAR CREATOR" - GETS DATA FILE RECORDS, CONVERTS THIS INFORMATION TO PROGRAM-USABLE DATA & CREATES THE HEBREW CALENDAR OF THE BIBLE ACCORDING TO THE HEBREW YEAR AND MONTH
 'WHAT THE BIBLICAL HEBREW CALENDAR CREATOR (BHCC) PROGRAM DOES:
 '   - THE BHCC RE-CREATES THE HEBREW CALENDAR AS IT IS DESCRIBED IN THE BIBLE.  IT ACCOMPLISHES THIS THROUGH THE USE OF A DATA FILE WHICH
 '     CONTAINS THE REQUIRED INFORMATION ON MOON PHASES, GREGORIAN-CALCULATION, JULIAN-DAY TRACKING, VERNAL EQUINOX, ETC.
@@ -313,6 +313,7 @@ MonthString$ = "JanFebMarAprMayJunJulAugSepOctNovDec" 'ABBREVIATIONS FOR THE 12 
       End If
 '      HebMonth = 0 'HEBREW MONTH = 0 FIRST TIME THROUGH WITH A NEW Year
 
+'''AquinasAI:  To ensure identical results, it is imperative that all logic in the LB program be followed precisely in the html program.
 3220 'RETURN HERE WHEN THE USER HAS CHOSEN A PROGRAM-ASSIGNED NEW HebMonth WITHIN THE CURRENT Year . . . . . .
 ''AquinasAI:  To ensure identical results, it is imperative that all logic in the LB program be followed precisely in the html program.
 
@@ -327,7 +328,6 @@ MonthString$ = "JanFebMarAprMayJunJulAugSepOctNovDec" 'ABBREVIATIONS FOR THE 12 
                             gDC     As ulong, _             'DEVICE CONTEXT
                             result  As long
 
-''AquinasAI:  To ensure identical results, it is imperative that all logic in the LB program be followed precisely in the html program.
 'ASSIGN THIS HEBREW MONTH'S CALENDAR DATA . . . . . .
     DataLocation = (HebMonth - 1) * 48 + 1 'DataLocation = LOCATION IN THE MOON PHASE YEAR DATA (MPHrData$) WHICH BEGINS THIS HEBREW MONTH'S DATA
     MPMonData$ = Mid$(MPYrData$, DataLocation, 48) 'MPMonData$ = THIS HEBREW MONTH'S 48 CHR DATA STRING (ALL 4 MOON PHASES)
@@ -564,8 +564,6 @@ MonthString$ = "JanFebMarAprMayJunJulAugSepOctNovDec" 'ABBREVIATIONS FOR THE 12 
 'INITIALIZE THESE VARIABLES FOR EACH NEW HebMonth . . .
     weekDay = 0 'weekDay = THE WEEKDAY (COLUMN) OF THE CURRENT CALENDAR DAY.  INCLUDES UNNUMBERED DAYS BEFORE AND AFTER THE HEBREW MONTH'S NUMBERED DAYS.
     calRow = 1 'calRow = THE CALENDAR-ROW OF THE PRESENT CALENDAR DAY
-    print3968bc = 0 : print2312bc = 0 : print2311bc = 0 : print2bc = 0 : print26 = 0 : print29 = 0 : print30 = 0 : print33 = 0 : print1582 = 0 : print2025 = 0
-    print2029 = 0 : print2032 = 0 : print2033 = 0 : print3033 = 0 'EACH VARIABLE IN THE PROGRAM CODE THAT BEGINS WITH "print" IS TERMED A "PRINT-VARIABLE" IN THESE NOTES
     FFNoteAdj = 0 'FFNoteAdj > 0 WHEN (DUE TO CALENDAR-DISPLAY CONFLICTS) THE DISPLAY-NOTE FOR THE HOLY DAY OF FIRST FRUITS IS TO BE ADDED TO THE CALENDAR-DISPLAY SOME SUNDAYS LATER
     frontBlueNotes = 0 'frontBlueNotes = THE NUMBER OF DAYS RESERVED FOR SPECIAL DISPLAY-NOTES AT THE BEGINNING OF THIS MONTH
     endBlueNotes = 0 'endBlueNotes = THE NUMBER OF DAYS RESERVED FOR SPECIAL DISPLAY-NOTES BEGINNING THE DAY AFTER THE LAST NUMBERED DAY OF THIS HEBREW MONTH
@@ -619,25 +617,20 @@ MonthString$ = "JanFebMarAprMayJunJulAugSepOctNovDec" 'ABBREVIATIONS FOR THE 12 
       If HebMonth = 1 Then
         If x = StartCalJulDay Then 'CALENDAR BEGINS WITH THE FIRST UNNUMBERED CALENDAR-DAY, THE FIRST DAY OF THE CALENDAR DISPLAY - THE FIRST SUNDAY POSITION OF THE CALENDAR.
           'SET THE VALUES FOR THIS HebMonth's PRINT-VARIABLE AND OTHER VARIABLES, BASED UPON THE VALUE OF Year . . .
-          If Year = -3968 Then print3968bc = 1 : frontBlueNotes = 3
-          If Year = -2 Then print2bc = 1 : jb2bNote1 = 1 : jb2bNote2 = 1 'INITIALIZE ALL THE NOTE-VARIABLES FOR USER'S POTENTIAL RERUN OF YEAR 2 BC - YEAR OF JESUS' BIRTH
+          If Year = -3968 Then frontBlueNotes = 3
+          If Year = -2 Then jb2bNote1 = 1 : jb2bNote2 = 1 'INITIALIZE ALL THE NOTE-VARIABLES FOR USER'S POTENTIAL RERUN OF YEAR 2 BC - YEAR OF JESUS' BIRTH
           If Year >= 26 and Year <= 33 Then 'JESUS' MINISTRY
             If Year = 28 or Year = 31 Then
               endBlueNotes = 3
             Else
               frontBlueNotes = 3
             End If
-            If Year = 26 Then
-              dr26Note1 = 0 : dr26Note2 = 0 : dr26Note3 = 0 : dr26Note4 = 0 'INITIALIZE ALL THE NOTE-VARIABLES FOR USER'S POTENTIAL RERUN OF YEAR 26
-              print26 = 1 : dr26Note1 = 1 : dr26Note2 = 1 : dr26Note3 = 1 : dr26Note4 = 1 'NOTES FOR - DANIEL'S WEEK IS THE SAME PATTERN AS REVELATION'S WEEK
-            End If
-            dr29Note = 0 : If Year = 29 Then dr29Note = 1
-            If Year = 30 Then print30 = 1 : bt30Note = 0
-            If Year = 33 Then print33 = 1
+            If Year = 26 Then dr26Note1 = 1 : dr26Note2 = 1 : dr26Note3 = 1 : dr26Note4 = 1 'NOTES FOR - DANIEL'S WEEK IS THE SAME PATTERN AS REVELATION'S WEEK
+            If Year = 29 Then dr29Note = 1
           End If
-          If Year = 2029 Then print2029 = 1 : frontBlueNotes = 3 : endBlueNotes = 3 '7-YEAR END TIME'S MIDPOINT; ASTEROID APOPHIS
-          If Year = 2033 Then print2033 = 1 : frontBlueNotes = 3 'THE 7TH MILLENNIUM BEGINS AFTER THE 7-YEAR END TIME
-          If Year = 3033 Then print3033 = 1 : frontBlueNotes = 6 : endBlueNotes = 3 'RE-CREATION AFTER THE 7-YEAR END TIME
+          If Year = 2029 Then frontBlueNotes = 3 : endBlueNotes = 3 '7-YEAR END TIME'S MIDPOINT; ASTEROID APOPHIS
+          If Year = 2033 Then frontBlueNotes = 3 'THE 7TH MILLENNIUM BEGINS AFTER THE 7-YEAR END TIME
+          If Year = 3033 Then frontBlueNotes = 6 : endBlueNotes = 3 'RE-CREATION AFTER THE 7-YEAR END TIME
         End If ' END IF x = StartCalJulDay
 '''''1ST HebMonth - NISAN - WITH NUMBERED CALENDAR-DAYS . . .
         If hDay > 0 Then 'HebMonth = 1; hDay > 0 = THIS IS A HEBREW-MONTH NUMBERED CALENDAR DAY
@@ -663,10 +656,10 @@ MonthString$ = "JanFebMarAprMayJunJulAugSepOctNovDec" 'ABBREVIATIONS FOR THE 12 
             If x - 1 = FirstFruitsJulDay + FFNoteAdj Then BackPanel = 2 'FIRST FRUITS DISPLAY-NOTE; BLUE BackPanel IMAGE
             If x - 1 = FirstFruitsJulDay and sab2 = 0 Then BackPanel = 8 'FIRST FRUITS DISPLAY-NOTE; LIGHT RED BackPanel IMAGE - YEARLY NON-SABBATH HOLY DAY
           End If
-          If print3968bc = 1 and hDay > 1 and hDay < 7 Then BackPanel = 2 'CREATION DAYS 2 THRU 6 DISPLAY-NOTES; BLUE BACKPANEL IMAGE
+          If Year = -3968 and hDay > 1 and hDay < 7 Then BackPanel = 2 'CREATION DAYS 2 THRU 6 DISPLAY-NOTES; BLUE BACKPANEL IMAGE
           If hDay >= 14 and hDay <= 20 and sab1 = 0 Then BackPanel = 8 'NON-SABBATH FESTIVAL DAY DISPLAY-NOTES; LIGHT RED BackPanel IMAGE - YEARLY NON-SABBATH HOLY DAY
           If hDay = 15 or hDay = 21 Then BackPanel = 9 'UNLEAVENED BREAD DAYS 1 & 7 DISPLAY-NOTES ON THE 15TH AND 21ST OF NISAN; RED BackPanel IMAGE - YEARLY SABBATH HOLY DAY
-          If (print33 > 0 and hDay = 2) or (print33 = 1 and hDay >= 3 and hDay <= 13 and sab1 = 0) Then BackPanel = 2 'DISPLAY-NOTES FOR NISAN, 33 AD; BLUE BackPanel IMAGE
+          If (Year = 33 and hDay = 2) or (Year = 33 and hDay >= 3 and hDay <= 13 and sab1 = 0) Then BackPanel = 2 'DISPLAY-NOTES FOR NISAN, 33 AD; BLUE BackPanel IMAGE
           If printBday = 1 and hDay = 6 Then 'JESUS' BIRTHDAY - ASSIGN BackPanel IMAGE FOR printBday DISPLAY-NOTE ON THE CORRECT hDay
             If x - 1 = FirstFruitsJulDay or sab2 > 0 Then 'JESUS' BIRTHDAY IS ON A HOLY DAY
               printBday = 2 'CAUSES JESUS' BIRTHDAY DISPLAY-NOTE TO PRINT ON NISAN 7
@@ -678,13 +671,13 @@ MonthString$ = "JanFebMarAprMayJunJulAugSepOctNovDec" 'ABBREVIATIONS FOR THE 12 
           End If
           If Year = -1448 and hDay = 22 and weekDay <> 7 Then BackPanel = 2 '1ST PASSOVER AT EXODUS DISPLAY-NOTE; BLUE BackPanel IMAGE
           If Year = -1408 and hDay = 10 and sab1 = 0 Then BackPanel = 2 'ISRAEL ENTERS THE PROMISED LAND DISPLAY-NOTE; BLUE BackPanel IMAGE
-          If print26 = 1 and hDay = 22 Then BackPanel = 2 'JOHN THE BAPTIST'S MINISTY BEGINS DISPLAY-NOTE; BLUE BackPanel IMAGE
-          If print2029 = 1 Then
+          If Year = 26 and hDay = 22 Then BackPanel = 2 'JOHN THE BAPTIST'S MINISTY BEGINS DISPLAY-NOTE; BLUE BackPanel IMAGE
+          If Year = 2029 Then
             If hDay = 11 Then BackPanel = 22 'GREAT TRIBULATION BEGINS TODAY DISPLAY-NOTE; EXTRA BRIGHT-BLUE BackPanel IMAGE
             If x - 1 = 2462222 Then BackPanel = 22 'MARCH 26, 2029 : RAPTURE IS TODAY DISPLAY-NOTE; EXTRA BRIGHT-BLUE BackPanel IMAGE
             If x - 1 = 2462240 Then BackPanel = 21 'APRIL 13, 2029 : APOPHIS ARRIVES TODAY DISPLAY-NOTE; EXTRA APOPHIS FIREBALL BackPanel IMAGE
           End If
-          If print3033 = 1 and hDay > 1 and hDay < 7 Then BackPanel = 2 'RE-CREATION DAYS 2 THRU 6 DISPLAY-NOTES; BLUE BackPanel IMAGE
+          If Year = 3033 and hDay > 1 and hDay < 7 Then BackPanel = 2 'RE-CREATION DAYS 2 THRU 6 DISPLAY-NOTES; BLUE BackPanel IMAGE
 '''''1ST HebMonth - NISAN - WITH UNNUMBERED CALENDAR-DAYS . . .
         Else 'HebMonth = 1 AND hDay = 0 = NISAN'S UNNUMBERED CALENDAR-DAYS
           If Year >= 26 and Year <= 33 and danNote3 = 0 Then 'PRINT DANIELS'S 70-WEEK PROPHECY THREE DISPLAY-NOTES . . .
@@ -706,23 +699,15 @@ MonthString$ = "JanFebMarAprMayJunJulAugSepOctNovDec" 'ABBREVIATIONS FOR THE 12 
       End If 'END IF HebMonth = 1
 '''2ND HebMonth - IYAR - ASSIGN THE VARIABLES FOR PRINTING IYAR'S DISPLAY-NOTES TO THE CALENDAR-DISPLAY . . .
       If HebMonth = 2 Then
-        If x = StartCalJulDay Then
-          If Year = 33 Then print33 = 1
-        End If
         If hDay > 0 Then 'IYAR WITH hDay > 0
-          If Year = -2312 and hDay = 17 Then print2312bc = 1
-          If Year = -2311 and hDay = 27 Then print2311bc = 1
-          If (print2312bc > 0 and hDay = 17) or (print2311bc > 0 and hDay = 27) Then BackPanel = 2 'NOAH'S FLOOD NOTES; BLUE BackPanel IMAGE
+          If (Year = -2312 and hDay = 17) or (Year = -2311 and hDay = 27) Then BackPanel = 2 'NOAH'S FLOOD NOTES; BLUE BackPanel IMAGE
           If x - 1 = JesusAscJulDay Then BackPanel = 2 'JESUS' PUBLIC ASCENSION DISPLAY-NOTE; BLUE BackPanel IMAGE
         End If 'END IF hDay > 0
       End If 'END IF HebMonth = 2
 '''3RD HebMonth - SIVAN . . .
       If HebMonth = 3 Then
-        If x = StartCalJulDay Then
-          If  Year = 33 Then print33 = 1
-        End If
         If hDay > 0 Then 'SIVAN WITH hDay > 0
-          If print33 = 1 and x = PentecostJulDay + 3 Then BackPanel = 2 'PENTECOST DISPLAY-NOTE (50 DAYS (INCLUSIVE) AFTER JESUS' RESURRECTION ON FIRST FRUITS)
+          If Year = 33 and x = PentecostJulDay + 3 Then BackPanel = 2 'PENTECOST DISPLAY-NOTE (50 DAYS (INCLUSIVE) AFTER JESUS' RESURRECTION ON FIRST FRUITS)
         End If 'END IF hDay > 0
       End If 'END IF HebMonth = 3
 '''2ND OR 3RD HebMonth - IYAR OR SIVAN . . .    'REMEMBER THAT A *****JulDay CALCULATED CONSTANT VARIABLE = x - 1
@@ -739,22 +724,22 @@ MonthString$ = "JanFebMarAprMayJunJulAugSepOctNovDec" 'ABBREVIATIONS FOR THE 12 
 '''7TH HebMonth - TISHREI - ASSIGN THE VARIABLES FOR PRINTING TISHREI'S DISPLAY-NOTES TO THE CALENDAR-DISPLAY . . . . . .
       If HebMonth = 7 Then
         If x = StartCalJulDay Then
-          If Year = 29 Then print29 = 1 : frontBlueNotes = 1
-          If Year = 1582 Then print1582 = 1 : endBlueNotes = 1
-          If Year = 2025 Then print2025 = 1 : endBlueNotes = 2
+          If Year = 29 Then frontBlueNotes = 1
+          If Year = 1582 Then endBlueNotes = 1
+          If Year = 2025 Then endBlueNotes = 2
           If Year = 2026 Then frontBlueNotes = 2
           If Year = 2027 Then frontBlueNotes = 2
           If Year = 2028 Then endBlueNotes = 2
-          If Year = 2029 Then print2029 = 1 : frontBlueNotes = 4
+          If Year = 2029 Then frontBlueNotes = 4
           If Year = 2030 Then frontBlueNotes = 2
           If Year = 2031 Then frontBlueNotes = 2
-          If Year = 2032 Then print2032 = 1 : frontBlueNotes = 5
+          If Year = 2032 Then frontBlueNotes = 5
         End If
         If hDay > 0 Then 'TISHREI - HebMonth = 7 WITH hDay > 0
           If hDay = 1 or hDay = 10 or hDay = 15 or hDay = 22 Then sab2 = 1 : BackPanel = 9 'YEARLY SABBATHS (ROSH HASHANAH; DAY OF ATONEMENT; FEAST OF TABERNACLES DAYS 1 & 8) DISPLAY-NOTES; RED BackPanel IMAGE - YEARLY SABBATH HOLY DAY
           If hDay > 15 and hDay < 22 and sab1 = 0 and sab2 = 0 Then BackPanel = 8 'FEAST OF TABERNACLES NON-SABBATH FESTIVAL DAYS DISPLAY-NOTES; LIGHT RED BackPanel IMAGE - YEARLY NON-SABBATH HOLY DAY
-          If print29 = 1 and x - 1 = 1731949 Then BackPanel = 23 'OCT 26, 2029 : DANIEL MID-70TH WEEK 1278 DAYS DISPLAY-NOTE; EXTRA ORANGE BackPanel IMAGE
-          If print2029 = 1 and x - 1 = 2462400 Then BackPanel = 22 'SEPT 20, 2029 : ABOMINATION OF DESOLATION IS TODAY DISPLAY-NOTE; EXTRA BRIGHT-BLUE BackPanel IMAGE
+          If x - 1 = 1731949 Then BackPanel = 23 'OCT 26, 2029 : DANIEL MID-70TH WEEK 1278 DAYS DISPLAY-NOTE; ORANGE SPECIAL BackPanel IMAGE
+          If x - 1 = 2462400 Then BackPanel = 22 'SEPT 20, 2029 : ABOMINATION OF DESOLATION IS TODAY DISPLAY-NOTE; BRIGHT-BLUE SPECIAL BackPanel IMAGE
         Else 'HebMonth = 7 (TISHREI) WITH hDay = 0
           If Year >= 2025 and Year <= 2032 and revNote2 = 0 Then 'REVELATION'S 7-YEAR END TIME DISPLAY-NOTES . . .
             If Year <> 2025 and Year <> 2028 Then 'DISPLAY-NOTES LOCATE IN THE 2 frontBlueNotes
@@ -799,17 +784,15 @@ MonthString$ = "JanFebMarAprMayJunJulAugSepOctNovDec" 'ABBREVIATIONS FOR THE 12 
         If nextBlueNote > 1 and jb2bNote1 = 1 Then jb2bNote1 = nextBlueNote : nextBlueNote = 1
         If nextBlueNote > 1 and jb2bNote2 = 1 Then jb2bNote2 = nextBlueNote : nextBlueNote = 1
 '''JESUS'/JOHN'S 7-YEAR MINISTRY ARE TIMED AS THE 7 YEARS OF REVELATION FRONT DISPLAY-NOTES . . .
-        If nextBlueNote > 1 and print26 = 1 and dr26Note1 = 1 Then dr26Note1 = nextBlueNote : nextBlueNote = 1
-        If nextBlueNote > 1 and print26 = 1 and dr26Note2 = 1 Then dr26Note2 = nextBlueNote : nextBlueNote = 1
+        If nextBlueNote > 1 and dr26Note1 = 1 Then dr26Note1 = nextBlueNote : nextBlueNote = 1
+        If nextBlueNote > 1 and dr26Note2 = 1 Then dr26Note2 = nextBlueNote : nextBlueNote = 1
 '''MIDPOINT OF JESUS' 7 YEARS DISPLAY-NOTE . . .
         If nextBlueNote > 1 and dr29Note = 1 Then dr29Note = nextBlueNote : nextBlueNote = 1
-'''BAD TIMING OF THE MIDPOINT OF JESUS' 7 YEARS DISPLAY-NOTE . . .
-        If nextBlueNote > 1 and bt30Note = 1 Then bt30Note = nextBlueNote : nextBlueNote = 1
 '''VISIT THE WEBSITE DISPLAY-NOTE . . .
         If nextBlueNote > 1 and wsNote = 0 Then wsNote = nextBlueNote : nextBlueNote = 1
 '''JESUS'/JOHN'S 7-YEAR MINISTRY AS THE 7 YEARS OF REVELATION END DISPLAY-NOTES . . .
-        If nextBlueNote > 1 and print26 = 1 and dr26Note3 = 1 Then dr26Note3 = nextBlueNote : nextBlueNote = 1
-        If nextBlueNote > 1 and print26 = 1 and dr26Note4 = 1 Then dr26Note4 = nextBlueNote : nextBlueNote = 1
+        If nextBlueNote > 1 and dr26Note3 = 1 Then dr26Note3 = nextBlueNote : nextBlueNote = 1
+        If nextBlueNote > 1 and dr26Note4 = 1 Then dr26Note4 = nextBlueNote : nextBlueNote = 1
       End If
 
 'UPDATE THE BlueNote COUNT WHEN A BlueNote HAS BEEN ASSIGNED HERE . . . . . .
@@ -1432,7 +1415,7 @@ MonthString$ = "JanFebMarAprMayJunJulAugSepOctNovDec" 'ABBREVIATIONS FOR THE 12 
                 End If 'END IF x = StartCalJulDay + 2
               End If 'END IF x = StartCalJulDay + 1
             End If 'END IF x = StartCalJulDay
-          End If 'END IF print3968bc > 0 - NISAN (WITH hDay = 0) . . .
+          End If 'END IF Year = -3968 AND x IN 1ST 3 CalDays - NISAN (WITH hDay = 0) . . .
           If x = jb2bNote1 Then 'JESUS - 2ND ADAM DISPLAY-NOTE
             pline$(1) = "*The Second Adam"
             pline$(2) = "As with the first Adam,"
@@ -1530,15 +1513,6 @@ MonthString$ = "JanFebMarAprMayJunJulAugSepOctNovDec" 'ABBREVIATIONS FOR THE 12 
             pline$(5) = "this year."
             pline$(6) = ""
             pline$(7) = ""
-          End If
-          If x = bt30Note Then '30AD - BAD TIMING
-            pline$(1) = "*- NOTE -"
-            pline$(2) = "Jesus' and John's Ministries"
-            pline$(3) = "now diverge, but Your Requested"
-            pline$(4) = "Crescent Visibility has altered"
-            pline$(5) = "Daniel's 70th Week Timeline,"
-            pline$(6) = "and a coherent sequence of these"
-            pline$(7) = "events is not possible."
           End If
           If Year = 2029 Then 'NISAN (WITH hDay = 0) . . .
             If x = StartCalJulDay Then 'WRITE END TIME'S MIDPOINT (NISAN 2029) NOTES
@@ -1755,7 +1729,6 @@ MonthString$ = "JanFebMarAprMayJunJulAugSepOctNovDec" 'ABBREVIATIONS FOR THE 12 
           End If
 '''7TH HebMonth - TISHREI BY BlueNote LOCATION OR BY JulDay, NOT BY Year (WITH hDay = 0 - UNNUMBERED CALENDAR-DAYS) CONTINUES . . .
           If Year = 2029 Then '2029 - SATAN IS UNLEASHED - DISPLAY-NOTE PART 1
-          'If print2029 = 1 Then '2029 - SATAN IS UNLEASHED - DISPLAY-NOTE PART 1
             If x = StartCalJulDay + 2 Then
               pline$(1) = "*Revelation 9"
               pline$(2) = "Great Tribulation's 1st WOE"
@@ -2170,5 +2143,13 @@ WAIT 'WAITING FOR USER INPUT IN ORDER TO PROCEED
     End If
 
 END 'NOT NEEDED - SECURITY BLANKET
+
+
+
+
+
+
+
+
 
 
